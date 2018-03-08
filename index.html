@@ -25,10 +25,35 @@
             //"this" refers to the button being clicked
             var instrument = $(this).attr("data-instrument");
 
+            //Construct URL to search giphy for the clicked button
 
-        }
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + instrument + "&api_key=Gc5FI979zU30A8kQUEMBdAcTmScRxuR7&limit=10";
 
+            // Performing the AJAX GET request
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function(response) {
+                var results = response.data;
+                console.log(response);
+                for (var i = 0; i < results.length; i++) {
+                    if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+                        var gifDiv = $("<div class='item'>");
+                        var rating = results[i].rating;
+                        var p = $("<p>").text("Rating: " + rating);
+                        var instrumentImage = $("<img>");
+                        instrumentImage.attr("src", results[i].images.fixed_height.url);
+                        gifDiv.append(p);
+                        gifDiv.append(instrumentImage);
+                        $("#gifs-appear-here").prepend(gifDiv);
+                    }
+                }
+            });
+            
+            
+        });
 
+    </script>
 
 
 </body>
