@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Giphy Project</title>
+</head>
+
+<body>
+    <button data-instrument="drums">Drums</button>
+    <button data-instrument="microphones">Microphones</button>
+    <button data-instrument="keyboards">Keyboards</button>
+    <button data-instrument="trumpets">Trumpets</button>
+    <button data-instrument="acoustic guitars">Acoustic Guitars</button>
+    <button data-instrument="electric guitars">Electric Guitars</button>
+
+    <div id="gifs-appear-here">
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        //Event listener for all button elements
+        $("button").on("click", function() {
+            //"this" refers to the button being clicked
+            var instrument = $(this).attr("data-instrument");
+
+
+        }
+
+
+
+
+</body>
+
+
+
+</html>
