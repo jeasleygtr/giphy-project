@@ -1,63 +1,38 @@
 <!DOCTYPE html>
-<html lang="us">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Giphy Project</title>
+    <title>Instrument gifs</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
-    <button data-instrument="drums">Drums</button>
-    <button data-instrument="microphones">Microphones</button>
-    <button data-instrument="keyboards">Keyboards</button>
-    <button data-instrument="trumpets">Trumpets</button>
-    <button data-instrument="acoustic guitars">Acoustic Guitars</button>
-    <button data-instrument="electric guitars">Electric Guitars</button>
+    <div class="container">
+        <div class="row toprow">
+            <div class="col-md-9">
+                <div id="musicButtons"></div>
+            </div>
 
-    <div id="gifs-appear-here">
+            <div class="col-md-3">
+                <form id="musicForm">
+                    <label for="music-input">Search for a musical instrument</label>
+                    <input type="text" id="music-input">
+                    <input type="submit" id="addMusic" value="Submit">
+                </form>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col-md-12">
+                <div id="musicGifs"></div>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        //Event listener for all button elements
-        $("button").on("click", function() {
-            //"this" refers to the button being clicked
-            var instrument = $(this).attr("data-instrument");
-
-            //Construct URL to search giphy for the clicked button
-
-            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + instrument + "&api_key=Gc5FI979zU30A8kQUEMBdAcTmScRxuR7&limit=10";
-
-            // Performing the AJAX GET request
-            $.ajax({
-                url: queryURL,
-                method: "GET"
-            }).then(function(response) {
-                var results = response.data;
-                console.log(response);
-                for (var i = 0; i < results.length; i++) {
-                    if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
-                        var gifDiv = $("<div class='item'>");
-                        var rating = results[i].rating;
-                        var p = $("<p>").text("Rating: " + rating);
-                        var instrumentImage = $("<img>");
-                        instrumentImage.attr("src", results[i].images.fixed_height.url);
-                        gifDiv.append(p);
-                        gifDiv.append(instrumentImage);
-                        $("#gifs-appear-here").prepend(gifDiv);
-                    }
-                }
-            });
-            
-            
-        });
-
-    </script>
-
-
+    <script src="assets/javascript/giphy.js"></script>
 </body>
-
-
 
 </html>
